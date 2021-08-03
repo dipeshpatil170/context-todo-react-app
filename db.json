@@ -1,0 +1,24 @@
+{
+  "todos": [
+    {
+      "name": "test",
+      "id": 1
+    },
+    {
+      "name": "seconds",
+      "id": 2
+    },
+    {
+      "name": "Go to gyms",
+      "id": 4
+    },
+    {
+      "name": "Wake ups",
+      "id": 5
+    },
+    {
+      "name": "added",
+      "id": 6
+    }
+  ]
+}
