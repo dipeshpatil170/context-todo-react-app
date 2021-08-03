@@ -8,7 +8,7 @@ export default class TodosList extends Component {
         const { todos } = this.context;
         return (
             <>
-                <table className="table table-responsive-md w-50 table-hover">
+                <table className="table table-responsive-md w-50  text-center table-hover">
                     <thead>
                         <tr>
                             <th >Sr.No</th>

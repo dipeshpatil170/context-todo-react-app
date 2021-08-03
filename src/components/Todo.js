@@ -20,7 +20,7 @@ export default class Todo extends Component {
         this.setState({ isEditable: !this.state.isEditable });
         setTimeout(() => {
             this.context.resetSuccessValues();
-        }, 2000);
+        }, 1000);
     }
     handleChange(e) {
         this.setState({ name: e.target.value });
@@ -29,7 +29,7 @@ export default class Todo extends Component {
         this.context.deleteTask(id);
         setTimeout(() => {
             this.context.resetSuccessValues();
-        }, 2000);
+        }, 1000);
     }
     render() {
         const { todo } = this.props;
@@ -44,7 +44,7 @@ export default class Todo extends Component {
                     <td>{todo.id}</td>
                     <td>{todo.name}</td>
                     <td><i onClick={() => this.onEdit(todo.id, todo.name)} className="bi bi-pencil-square text-dark"></i></td>
-                    <td><i className="bi bi-trash text-danger" onClick={() => this.handleDelete(todo.id)}></i></td>
+                    <td><i className="bi bi-trash text-danger" onClick={() => { if (window.confirm('Are you sure ? you wish to delete this item?')) this.handleDelete(todo.id) }}></i></td>
                 </tr>
         )
            

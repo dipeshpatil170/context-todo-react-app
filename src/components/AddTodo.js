@@ -6,6 +6,7 @@ export default class AddTodo extends Component {
         super(props)
         this.state = {
             task: '',
+            invalidTask: false
         }
     }
     static contextType = TodoContext;
@@ -15,12 +16,18 @@ export default class AddTodo extends Component {
     }
 
     handleSubmit(e) {
-        this.context.addTask(this.state.task);
         e.preventDefault();
-        this.setState({ task:''})
+        if (this.state.task.trim() === "") {
+            this.setState({ invalidTask: true })
+            return false;
+        } else {
+            this.setState({ invalidTask: false })
+            this.context.addTask(this.state.task.trim());
+            this.setState({ task: '' })
+        }
         setTimeout(()=> {
             this.context.resetSuccessValues();
-        }, 2000);
+        }, 1000);
     }
     
     render() {
@@ -31,6 +38,11 @@ export default class AddTodo extends Component {
                     <div className="col"><input type="text" className="form-control col-sm-4" onChange={(e) => this.handleChange(e)} value={this.state.task} id="task" name="task" placeholder="Enter Task Name" /></div>
                     <div className="col"><button type="submit" className="btn btn-primary">Add</button></div>
                     </div>
+                    {this.state.invalidTask && (
+                        <div className="row">
+                            <small className="text-danger">Task name should not be empty..!</small>
+                        </div>
+                    )}
                 </form>
             </>
         )
