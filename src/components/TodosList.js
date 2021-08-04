@@ -11,9 +11,9 @@ export default class TodosList extends Component {
                 <table className="table table-responsive-md w-50  text-center table-hover">
                     <thead>
                         <tr>
-                            <th >Sr.No</th>
-                            <th >Task</th>
-                            <th colSpan="2">Actions</th>
+                            <th >TASK ID</th>
+                            <th >TASK</th>
+                            <th colSpan="2">ACTIONS</th>
                         </tr>
                     </thead>
                     <tbody>
