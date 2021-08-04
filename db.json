@@ -1,16 +1,14 @@
 {
   "todos": [
     {
-      "name": "seconds",
-      "id": 2
-    },
-    {
-      "name": "Go to gyms",
-      "id": 4
-    },
-    {
-      "name": "Go to gym khana",
+      "name": "Wake up",
+      "description": "This is order to wake ",
       "id": 6
+    },
+    {
+      "name": "new task",
+      "description": "Descs",
+      "id": 7
     }
   ]
 }

@@ -47,12 +47,13 @@ export default class TodoContextProvider extends Component {
     }
 
     addTask(data) {
+        const { name, description } = data;
         fetch('http://localhost:3001/todos', {
             method: 'POST',
             headers: {
                 'Content-Type': 'application/json'
             },
-            body: JSON.stringify({ name: data })
+            body: JSON.stringify({ name: name, description: description })
         })
             .then(res => res.json())
             .then(response => {
@@ -62,13 +63,14 @@ export default class TodoContextProvider extends Component {
                     console.warn(error);
                 })
     }
-    editTask(id, name) {
+    editTask(data) {
+        const { id, name, description } = data;
         fetch(`http://localhost:3001/todos/${id}`, {
             method: 'PUT',
             headers: {
                 'Content-Type': 'application/json'
             },
-            body: JSON.stringify({ name: name })
+            body: JSON.stringify({ name: name, description: description })
         })
             .then(res => res.json())
             .then(response => {
