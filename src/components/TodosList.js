@@ -13,6 +13,7 @@ export default class TodosList extends Component {
                         <tr>
                             <th >TASK ID</th>
                             <th >TASK</th>
+                            <th >Description</th>
                             <th colSpan="2">ACTIONS</th>
                         </tr>
                     </thead>

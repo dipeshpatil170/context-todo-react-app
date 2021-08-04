@@ -8,15 +8,21 @@ export default class Todo extends Component {
             isEditable: false,
             id: 0,
             name: '',
+            description:''
         }
     }
     static contextType = TodoContext;
 
-    onEdit(id, name) {
-        this.setState({ id: id, name: name, isEditable:!this.state.isEditable})
+    onEdit(id, name, description) {
+        this.setState({ id: id, name: name, description: description, isEditable:!this.state.isEditable})
     }
     onUpdate() {
-        this.context.editTask(this.state.id, this.state.name);
+        const newTask = {
+            id: this.state.id,
+            name: this.state.name,
+            description: this.state.description
+        }
+        this.context.editTask(newTask);
         this.setState({ isEditable: !this.state.isEditable });
         setTimeout(() => {
             this.context.resetSuccessValues();
@@ -37,13 +43,15 @@ export default class Todo extends Component {
             this.state.isEditable ? <tr>
                 <td>TASK-ID:{todo.id}</td>
                 <td><input type="text" className="form-control" value={this.state.name} onChange={(e) => this.handleChange(e) }/></td>
+                <td><input type="text" className="form-control" value={this.state.description} onChange={(e) => this.setState({ description:e.target.value}) }/></td>
                 <td><i className="bi bi-check-lg text-success" onClick={() => this.onUpdate()}></i></td>
                 <td><i className="bi bi-x-circle" onClick={() => this.setState({ isEditable: !this.state.isEditable })}></i></td>
             </tr> :
                 <tr>
                     <td>TASK-ID:{todo.id}</td>
                     <td>{todo.name}</td>
-                    <td><i onClick={() => this.onEdit(todo.id, todo.name)} className="bi bi-pencil-square text-dark"></i></td>
+                    <td>{todo.description}</td>
+                    <td><i onClick={() => this.onEdit(todo.id, todo.name, todo.description)} className="bi bi-pencil-square text-dark"></i></td>
                     <td><i className="bi bi-trash text-danger" onClick={() => { if (window.confirm('Are you sure ? you wish to delete this item?')) this.handleDelete(todo.id) }}></i></td>
                 </tr>
         )

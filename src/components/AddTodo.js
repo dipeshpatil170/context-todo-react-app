@@ -6,6 +6,7 @@ export default class AddTodo extends Component {
         super(props)
         this.state = {
             task: '',
+            description:'',
             invalidTask: false
         }
     }
@@ -22,8 +23,12 @@ export default class AddTodo extends Component {
             return false;
         } else {
             this.setState({ invalidTask: false })
-            this.context.addTask(this.state.task.trim());
-            this.setState({ task: '' })
+            const newtask = {
+                name: this.state.task.trim(),
+                description: this.state.description.trim()
+            }
+            this.context.addTask(newtask);
+            this.setState({ task: '', description:'' })
         }
         setTimeout(()=> {
             this.context.resetSuccessValues();
@@ -33,11 +38,18 @@ export default class AddTodo extends Component {
     render() {
         return (
             <>
-            <form className="pt-5 pb-3" onSubmit={(e) => this.handleSubmit(e)}>
-                <div className="row">
-                    <div className="col"><input type="text" className="form-control col-sm-4" onChange={(e) => this.handleChange(e)} value={this.state.task} id="task" name="task" placeholder="Enter Task Name" /></div>
-                    <div className="col"><button type="submit" className="btn btn-primary">Add</button></div>
+                <form className="pt-5 pb-3" onSubmit={(e) => this.handleSubmit(e)}>
+                    <div class="form-floating mb-3 col-sm-4">
+                        <input type="text" class="form-control " id="name" placeholder="Task Name" onChange={(e) => this.handleChange(e)} value={this.state.task} id="task" />
+                            <label for="name">Task Name</label>
                     </div>
+                    <div class="form-floating col-sm-4">
+                        <textarea class="form-control" placeholder="Write description here" id="description" style={{ height: "100px" }} onChange={(e) => this.setState({description:e.target.value})} value={this.state.description}></textarea>
+                            <label for="comment">Description</label>
+                        </div>
+                    <div class="pt-2 col-sm-4">
+                        <button type="submit" className="btn btn-primary form-control">Add</button>
+                        </div>
                     {this.state.invalidTask && (
                         <div className="row">
                             <small className="text-danger">Task name should not be empty..!</small>
